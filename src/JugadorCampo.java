@@ -58,11 +58,22 @@ public class JugadorCampo extends Ficha{
     @Override
     public String toString() {
         return "JugadorCampo{" +
-                "nombre:" +this.getNombre() +
-                "mote:" +this.getMote() +
-                "dorsal:" +this.getDorsal() +
-                ", posicion=" + posicion +
-                ", porcentajeAcierto=" + porcentajeAcierto +
+                " nombre: " +this.getNombre() +
+                " mote: " +this.getMote() +
+                " dorsal: " +this.getDorsal() +
+                ", posicion= " + posicion +
+                ", porcentajeAcierto= " + porcentajeAcierto +
                 '}';
     }
+
+    public String tirarPenalti(Portero portero){
+        if (this.porcentajeAcierto>portero.getPorcentajeParar()){
+            return "El jugador: "+this.getNombre()+  " con dorsal " + this.getDorsal()+ " ha metido gol";
+        }
+        else {
+            return "El portero: "+ portero.getNombre() +" ha parado el penalty";
+        }
+    }
+
+
 }
