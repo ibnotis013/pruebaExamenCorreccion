@@ -7,35 +7,36 @@ public class Principal {
     private static ArrayList<String> nombreGoleadores = new ArrayList<String>();
 
     static void main() {
-        Equipo equipo= null;
+        ArrayList<Ficha> plantilla = new ArrayList<Ficha>();
 
-        //Portero portero = new Portero("navas",null,1,75);
+
+        Portero portero = new Portero("navas",null,1,75);
 
         // Creamos una lista para almacenar a nuestros jugadores
 
-        //ArrayList<Ficha> plantilla = new ArrayList<Ficha>();
-        //plantilla.add(portero);
+        plantilla.add(portero);
         // --- DEFENSAS ---
         //plantilla.add(new JugadorCampo("Carles Puyol", "Tiburón", 5, Posicion.DEFENSA));
-        //plantilla.add(new JugadorCampo("Sergio Ramos", "El Faraón", 4, Posicion.DEFENSA));
+        plantilla.add(new JugadorCampo("Sergio Ramos", "El Faraón", 4, Posicion.DEFENSA));
         //plantilla.add(new JugadorCampo("Virgil van Dijk", "VVD", 4, Posicion.DEFENSA));
 
         // --- CENTROCAMPISTAS ---
         //plantilla.add(new JugadorCampo("Luka Modric", "Cruyff de los Balcanes", 10, Posicion.CENTROCAMPISTA));
-        //plantilla.add(new JugadorCampo("Kevin De Bruyne", "Tintín", 17, Posicion.CENTROCAMPISTA));
+        plantilla.add(new JugadorCampo("Kevin De Bruyne", "Tintín", 17, Posicion.CENTROCAMPISTA));
         //plantilla.add(new JugadorCampo("Pedri González", "El Mago", 8, Posicion.CENTROCAMPISTA));
-        //plantilla.add(new JugadorCampo("Jude Bellingham", "Belligol", 5, Posicion.CENTROCAMPISTA));
+        plantilla.add(new JugadorCampo("Jude Bellingham", "Belligol", 5, Posicion.CENTROCAMPISTA));
 
         // --- DELANTEROS ---
-        //plantilla.add(new JugadorCampo("Lionel Pessi", "La Pulga", 10, Posicion.DELANTERO));
+        plantilla.add(new JugadorCampo("Lionel Pessi", "La Pulga", 10, Posicion.DELANTERO));
         //plantilla.add(new JugadorCampo("Kylian Mbappé", "Donatello", 7, Posicion.DELANTERO));
         //plantilla.add(new JugadorCampo("Erling Haaland", "Cyborg", 9, Posicion.DELANTERO));
 
+        Equipo equipo= new Equipo("depor",plantilla);
 
         // Ejemplo para verificar que se crearon correctamente
 
-       // for (Ficha j : plantilla) {
-         //  detectarGoleador(j.tirarPenalti(portero),j);
+        // for (Ficha j : plantilla) {
+        //  detectarGoleador(j.tirarPenalti(portero),j);
         //}
         //System.out.println(nombreGoleadores);
 
@@ -70,11 +71,36 @@ public class Principal {
 
                     }
                 case 3:
+                    if(equipo.comprobarPlantilla()){
+                        System.out.println("el equipo esta bien creado.");
+                    }
+                    else {
+                        System.out.println("el equipo esta mal creado,");
+                    }
+
                     //Validar Equipo: Usa el metodo convocatoria para ver si la alineación es correcta.
 
                 case 4:
+                    for(Ficha f : equipo.getPlantilla()){
+                        if(f instanceof JugadorCampo){
+                            System.out.println("Es jugador de campo");
+                            int posicionPortero =equipo.encontrarPortero();
+
+                            if (posicionPortero==10){
+                                System.out.println("No hay portero en este equipo");
+                            }
+                            else {
+                                Portero porteroEquipo = (Portero) equipo.getPlantilla().get(posicionPortero);
+                                ((JugadorCampo) f).tirarPenalti(porteroEquipo);
+                            }
+                        }
+                        else {
+                            System.out.println("es portero");
+                        }
+                    }
                     //tanda de panalti, Hacen que los 4 jugadores de campo (defensa, centrocampistas y delantero) tiren un penalti cada uno al porter
 
+                    break;
 
                 default:
                     System.out.println("opcion invalida, introduzca una opcion correcta");

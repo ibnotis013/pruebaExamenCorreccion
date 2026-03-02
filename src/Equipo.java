@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Equipo {
     private String nombreEquipo;
     private ArrayList<Ficha> plantilla = new ArrayList<Ficha>();
-
+    private final int CODIGO_NO_EXISTE_PORTERO=10;
     public Equipo(String nombreEquipo, ArrayList<Ficha> plantilla) {
         this.nombreEquipo = nombreEquipo;
         this.plantilla = plantilla;
@@ -74,5 +74,15 @@ public class Equipo {
         }
         return false;
     }
+
+    public int encontrarPortero(){
+        for (int i = 0; i < this.plantilla.size(); i++) {
+            if (plantilla.get(i) instanceof Portero) {
+                return i;
+            }
+        }
+        return CODIGO_NO_EXISTE_PORTERO;
+    }
+
 
 }
